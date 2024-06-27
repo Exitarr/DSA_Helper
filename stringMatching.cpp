@@ -52,6 +52,23 @@ int RabinKarp(string s,string p){
 /*        KMP Algorithm       */
 
 
+// String : a a b # a a b a a b a a b
+// Lps    : 0 1 0 0 1 2 3 1 2 3 1 2 3
+
+vector<int> kmp(string s){
+    int n = size(s);
+    vector<int> lps(n,0);
+
+    for(int i=1;i<n;i++){
+        int prev_idx = lps[i-1];
+        while(prev_idx > 0 && s[i] != s[prev_idx]){
+            prev_idx = lps[prev_idx-1];
+        }
+        lps[i] = prev_idx + (s[i] == s[prev_idx]);
+    }
+
+    return lps;
+}
 
 
 
